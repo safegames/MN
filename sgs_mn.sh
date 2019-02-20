@@ -7,7 +7,7 @@ SGS_DAEMON='safegamesd'
 SGS_CLI='safegames-cli'
 SGS_PATH='/usr/local/bin/'
 SGS_REPO='https://github.com/safegames/safegames.git'
-SGS_TGZ='https://github.com/safegames/safegames/releases/download/v1.0.1/safegames-1.0.1-x64-linux-tar.gz'
+SGS_TGZ='https://github.com/safegames/safegames/releases/download/v1.0.0/safegames-1.0.0-x64-linux.tar.gz'
 SGS_ZIP=$(echo $SGS_TGZ | awk -F'/' '{print $NF}')
 SGS_NAME='safegames'
 SGS_PORT=61555
@@ -209,15 +209,15 @@ fi
 
 function prepare_system() {
 echo -e "Prepare the system to install ${GREEN}$SGS_NAME${NC} master node."
-apt-get update >/dev/null 2>&1
-DEBIAN_FRONTEND=noninteractive apt-get update > /dev/null 2>&1
-DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y -qq upgrade >/dev/null 2>&1
-apt install -y software-properties-common >/dev/null 2>&1
+sudo apt-get update >/dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive sudo apt-get update > /dev/null 2>&1
+DEBIAN_FRONTEND=noninteractive sudo apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y -qq upgrade >/dev/null 2>&1
+sudo apt install -y software-properties-common >/dev/null 2>&1
 echo -e "${GREEN}Adding bitcoin PPA repository"
-apt-add-repository -y ppa:bitcoin/bitcoin >/dev/null 2>&1
+sudo apt-add-repository -y ppa:bitcoin/bitcoin >/dev/null 2>&1
 echo -e "Installing required packages, it may take some time to finish.${NC}"
-apt-get update >/dev/null 2>&1
-apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" make software-properties-common \
+sudo apt-get update >/dev/null 2>&1
+sudo apt-get install -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" make software-properties-common \
 build-essential libtool autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev \
 libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git wget curl libdb4.8-dev bsdmainutils libdb4.8++-dev \
 libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev  libdb5.3++ libzmq5 >/dev/null 2>&1
