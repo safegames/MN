@@ -102,7 +102,7 @@ function create_config() {
 rpcuser=$RPCUSER
 rpcpassword=$RPCPASSWORD
 rpcallowip=127.0.0.1
-rpcport=57419
+rpcport=$SGS_RPC_PORT
 listen=1
 server=1
 daemon=1
