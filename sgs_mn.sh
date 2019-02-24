@@ -7,10 +7,10 @@ SGS_DAEMON='safegamesd'
 SGS_CLI='safegames-cli'
 SGS_PATH='/usr/local/bin/'
 SGS_REPO='https://github.com/safegames/safegames.git'
-SGS_TGZ='https://github.com/safegames/safegames/releases/download/v1.0.0/safegames-1.0.0-x64-linux.tar.gz'
+SGS_TGZ='https://github.com/safegames/safegames/releases/download/v1.0.1/safegames-1.0.1-x64-linux-tar.gz'
 SGS_ZIP=$(echo $SGS_TGZ | awk -F'/' '{print $NF}')
 SGS_NAME='safegames'
-SGS_PORT=61555
+SGS_PORT=61222
 SGS_RPC_PORT=61000
 
 NODEIP=$(curl -s4 icanhazip.com)
