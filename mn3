@@ -379,7 +379,11 @@ checks
 prepare_system
 ask_permission
 if [[ "$ANS" == "1" ]] || [[ "$ANS" == "" ]]; then
-	download_node
+	if [ -d CONFIGFOLDER ]; then
+		download_node
+	else
+		echo -e "No node found on the server"
+	fi
 elif [[ "$ANS" == "2" ]] ; then
 	update_system
 	download_node
