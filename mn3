@@ -76,8 +76,8 @@ function download_node() {
 function ask_permission() {
  echo -e "${YELLOW}Please confirm that you want to UPDATE, INSTALL or COMPILE $COIN_NAME binaries on his server.${NC}."
  echo -e "Press ${GREEN}ENTER${NC} to continue, if you want to update an existing $COIN_NAME node on this VPS!"
- echo -e "Type ${GREEN} 2{NC} if you want to use precompiled binaries, 
- echo -e "Type ${RED}3${NC} if you want to compile from source code on your server."
+ echo -e "Type ${GREEN} 2${NC} if you want to use precompiled binaries!"
+ echo -e "Type ${RED} 3${NC} if you want to compile from source code on your server."
  read -e ANS
 }
 
