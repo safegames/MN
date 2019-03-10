@@ -390,5 +390,5 @@ elif [[ "$ANS" == "3" ]] ; then
 	compile_node
 	setup_node
 else
-	echo "Not a valid option"
+	echo -e "Not a valid option"
 fi
