@@ -5,7 +5,8 @@ CONFIGFOLDER='.safegames'
 COIN_PATH='/usr/local/bin/'
 COIN_DAEMON='safegamesd'
 COIN_CLI='safegames-cli'
-COIN_REPO='https://github.com/safegames/safegames/releases/download/v1.0.2/safegames-1.0.2-x86_64-linux-gnu.tar.gz'
+COIN_REPO='https://github.com/safegames/safegames/'
+COIN_BIN='https://github.com/safegames/safegames/releases/download/v1.0.2/safegames-1.0.2-x86_64-linux-gnu.tar.gz'
 COIN_NAME='safegames'
 COIN_PORT=61222
 COIN_RPC_PORT=61000
@@ -39,8 +40,8 @@ progressfilt () {
 }
 
 function compile_node() {
-  echo -e "Prepare to compile $SGS_NAME"
-  git clone $SGS_REPO $TMP_FOLDER >/dev/null 2>&1
+  echo -e "Prepare to compile $COIN_NAME"
+  git clone $COIN_REPO $TMP_FOLDER >/dev/null 2>&1
   compile_error
   cd $TMP_FOLDER
   chmod +x ./autogen.sh 
@@ -66,7 +67,7 @@ function download_node() {
 	cp -r ~/.safegames destdir
 
 	echo -e "Installing the new version ........"
-	wget -qO- $COIN_REPO | sudo tar xvz -C /usr/local/bin/ 2>&1
+	wget -qO- $COIN_BIN | sudo tar xvz -C /usr/local/bin/ 2>&1
 	compile_error
 	safegamesd -daemon
 
@@ -212,7 +213,7 @@ EOF
 
 function enable_firewall() {
   echo -e "Installing and setting up firewall to allow ingress on port ${GREEN}$COIN_PORT${NC}"
-  ufw allow $COIN_PORT/tcp comment "$SGS_NAME MN port" >/dev/null
+  ufw allow $COIN_PORT/tcp comment "$COIN_NAME MN port" >/dev/null
   ufw allow ssh comment "SSH" >/dev/null 2>&1
   ufw allow ssh >/dev/null 2>&1
   ufw limit ssh/tcp >/dev/null 2>&1
@@ -278,7 +279,7 @@ fi
 }
 
 function update_system() {
-echo -e "Prepare the system to install ${GREEN}$SGS_NAME${NC} master node."
+echo -e "Prepare the system to install ${GREEN}$COIN_NAME${NC} master node."
 sudo apt-get update >/dev/null 2>&1
 sudo apt install -y software-properties-common >/dev/null 2>&1
 echo -e "${GREEN}Adding bitcoin PPA repository"
@@ -376,7 +377,7 @@ clear
 
 checks
 
-prepare_system
+
 ask_permission
 if [[ "$ANS" == "1" ]] || [[ "$ANS" == "" ]]; then
 	if [ -d CONFIGFOLDER ]; then
@@ -385,7 +386,7 @@ if [[ "$ANS" == "1" ]] || [[ "$ANS" == "" ]]; then
 		echo -e "No node found on the server"
 	fi
 elif [[ "$ANS" == "2" ]] ; then
-	update_system
+	prepare_system
 	download_node
 	setup_node  
 elif [[ "$ANS" == "3" ]] ; then
