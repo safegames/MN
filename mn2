@@ -40,19 +40,8 @@ function compile_node() {
   echo -e "Prepare to download $COIN_NAME"
   TMP_FOLDER=$(mktemp -d)
   cd $TMP_FOLDER
-  #wget --progress=bar:force $COIN_REPO 2>&1 ##| progressfilt
-  wget -qO- $COIN_REPO | sudo tar xvz -C /usr/local/bin/ 2>&1 | progressfilt
-  
+  wget -qO- $COIN_REPO | sudo tar xvz -C /usr/local/bin/ 2>&1
   compile_error
-  #COIN_ZIP=$(echo $COIN_REPO | awk -F'/' '{print $NF}')
-  #COIN_VER=$(echo $COIN_ZIP | awk -F'/' '{print $NF}' | sed -n 's/.*\([0-9]\.[0-9]\.[0-9]\).*/\1/p')
-  #COIN_DIR=$(echo ${COIN_NAME,,}-$COIN_VER)
-  #tar xvzf $COIN_ZIP --strip=2 ${COIN_DIR}/bin/${COIN_NAME,,}d ${COIN_DIR}/bin/${COIN_NAME,,}-cli>/dev/null 2>&1
-  #compile_error
-  #rm -f $COIN_ZIP >/dev/null 2>&1
-  #cp safegames* /usr/local/bin
-  #compile_error
-  strip $COIN_DAEMON $COIN_CLI
   cd -
   rm -rf $TMP_FOLDER >/dev/null 2>&1
   clear
