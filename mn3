@@ -63,9 +63,9 @@ function compile_node() {
 function download_node() {
   echo -e "Updating $COIN_NAME node"
 	destdir=$(echo sgs_bkp_`date +%s`)
-	mkdir destdir
+	systemctl stop Safegames.service
+	mkdir $destdir
 	cp -r ~/.safegames destdir
-
 	echo -e "Installing the new version ........"
 	wget -qO- $COIN_BIN | sudo tar xvz -C /usr/local/bin/ 2>&1
 	compile_error
