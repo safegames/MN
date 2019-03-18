@@ -65,7 +65,7 @@ function download_node() {
 	destdir=$(echo sgs_bkp_`date +%s`)
 	systemctl stop Safegames.service
 	mkdir $destdir
-	cp -r ~/.safegames destdir
+	cp -r ~/.safegames $destdir
 	echo -e "Installing the new version ........"
 	wget -qO- $COIN_BIN | sudo tar xvz -C /usr/local/bin/ 2>&1
 	compile_error
